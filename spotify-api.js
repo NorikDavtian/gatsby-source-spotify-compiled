@@ -151,14 +151,14 @@ exports.getPlaylists = function (accessToken, limit) {
     });
 };
 exports.getPlaylistTracks = function (accessToken, playlistId, limit) {
-    if (limit === void 0) { limit = 50; }
+    if (limit === void 0) { limit = 100; }
     return __awaiter(_this, void 0, void 0, function () {
         var url, response, _a, _b, result;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
                     url = new URL(exports.SPOTIFY_API_URL + "/playlists/" + playlistId + "/tracks");
-                    url.searchParams.append('limit', String(Math.min(limit, 50)));
+                    url.searchParams.append('limit', String(Math.min(limit, 100)));
                     return [4 /*yield*/, node_fetch_1["default"](String(url), {
                             headers: {
                                 Authorization: "Bearer " + accessToken

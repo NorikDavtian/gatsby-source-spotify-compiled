@@ -42,6 +42,7 @@ $ npx gatsby-source-spotify token <clientId> <clientToken>
     fetchPlaylists: true, // optional. Set to false to disable fetching of your playlists
     fetchRecent: true, // optional. Set to false to disable fetching of your recently played tracks
     timeRanges: ['short_term', 'medium_term', 'long_term'], // optional. Set time ranges to be fetched
+    playlistId: '' // playlist spotify_id
   },
 },
 ```
@@ -80,6 +81,61 @@ Example for your top artists with images and genres:
             }
           }
         }
+      }
+    }
+  }
+}
+```
+
+```graphql
+query SpotifyPlaylistAlbumCover {
+  playlist: allSpotifyPlaylistTrack(limit: 10) {
+    totalCount
+    edges {
+      node {
+        spotifyId
+        added_at
+        added_by {
+          id
+          type
+          uri
+          external_urls {
+            spotify
+          }
+        }
+        is_local
+        track {
+          id
+          name
+          preview_url
+          image {
+            localFile {
+              childImageSharp {
+              fluid(maxWidth: 400) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+          album {
+            name
+            id
+            images {
+              url
+              height
+              width
+            }
+          }
+          artists {
+            name
+          }
+          uri
+          popularity
+          href
+          explicit
+          duration_ms
+        }
+        order
       }
     }
   }

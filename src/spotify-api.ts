@@ -122,10 +122,10 @@ export const getPlaylists = async (accessToken: string, limit: number = 50) => {
 export const getPlaylistTracks = async (
   accessToken: string,
   playlistId: string,
-  limit: number = 50,
+  limit: number = 100,
 ) => {
   const url = new URL(`${SPOTIFY_API_URL}/playlists/${playlistId}/tracks`);
-  url.searchParams.append('limit', String(Math.min(limit, 50)));
+  url.searchParams.append('limit', String(Math.min(limit, 100)));
 
   const response = await fetch(String(url), {
     headers: {
